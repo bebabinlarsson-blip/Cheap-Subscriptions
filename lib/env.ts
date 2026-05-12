@@ -9,3 +9,7 @@ export function isGoogleAuthConfigured() {
 export function isPayPalConfigured() {
   return Boolean(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_CLIENT_SECRET);
 }
+
+export function isAuthSecretConfigured() {
+  return Boolean(process.env.NEXTAUTH_SECRET);
+}

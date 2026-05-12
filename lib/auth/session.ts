@@ -3,12 +3,20 @@ import { redirect } from "next/navigation";
 
 import { authOptions } from "@/lib/auth/options";
 import { isOwnerEmail } from "@/lib/auth/owner";
+import { isAuthSecretConfigured } from "@/lib/env";
 
 export async function getAuthSession() {
+  if (!isAuthSecretConfigured()) {
+    return null;
+  }
   return getServerSession(authOptions);
 }
 
 export async function requireUser(callbackUrl = "/dashboard") {
+  if (!isAuthSecretConfigured()) {
+    redirect("/?error=auth_unavailable");
+  }
+
   const session = await getAuthSession();
   if (!session?.user) {
     redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
