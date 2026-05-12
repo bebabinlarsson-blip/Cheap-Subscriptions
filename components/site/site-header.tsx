@@ -19,9 +19,14 @@ export async function SiteHeader() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-200 text-sm font-black text-slate-900">
-                PT
-              </div>
+              <Image
+                src="/logo-mark.svg"
+                alt="Premium Tools logo"
+                width={44}
+                height={44}
+                className="h-11 w-11 rounded-2xl"
+                priority
+              />
               <div>
                 <p className="text-xs uppercase tracking-[0.35em] text-slate-300">Premium Tools</p>
                 <h1 className="text-sm font-semibold text-white sm:text-base">Mega List</h1>
