@@ -27,11 +27,11 @@ export default async function HomePage() {
     <div className="space-y-20">
       <section className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="space-y-6">
-          <Badge className="border-orange-400/30 bg-orange-400/10 text-orange-100">Future-ready digital marketplace</Badge>
+          <Badge className="border-white/20 bg-white/10 text-slate-100">Future-ready digital marketplace</Badge>
           <div className="space-y-4">
-            <h1 className="max-w-4xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Premium Tools <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-300 bg-clip-text text-transparent">Mega List</span>
-            </h1>
+              <h1 className="max-w-4xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
+                Premium Tools <span className="text-slate-200">Mega List</span>
+              </h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-300">
               Instant access to verified digital tools, licenses, and productivity services.
             </p>
@@ -42,16 +42,16 @@ export default async function HomePage() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {trustBadges.map((item) => (
-              <Card key={item.label} className="flex items-center gap-3 border-white/10 p-4">
-                <item.icon className="h-5 w-5 text-cyan-300" />
-                <span className="text-sm text-slate-200">{item.label}</span>
-              </Card>
-            ))}
+                <Card key={item.label} className="flex items-center gap-3 border-white/10 p-4">
+                  <item.icon className="h-5 w-5 text-slate-300" />
+                  <span className="text-sm text-slate-200">{item.label}</span>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
 
         <Card className="relative overflow-hidden p-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.28),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.28),transparent_36%),radial-gradient(circle_at_center,rgba(168,85,247,0.2),transparent_40%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(148,163,184,0.18),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(51,65,85,0.2),transparent_40%)]" />
           <div className="relative space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <Card className="p-4">
@@ -63,12 +63,12 @@ export default async function HomePage() {
                 <h2 className="mt-2 text-3xl font-black text-white">{summary.categories}</h2>
               </Card>
               <Card className="col-span-2 p-4">
-                <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Low stock alerts</p>
-                <h2 className="mt-2 text-3xl font-black text-white">{summary.lowStock}</h2>
-                <p className="mt-2 text-sm text-slate-400">Display urgency while keeping fulfillment owner-managed and legitimate.</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Purchased items</p>
+                <h2 className="mt-2 text-3xl font-black text-white">{summary.purchasedItems}</h2>
+                <p className="mt-2 text-sm text-slate-400">Starts at 47 and increases by each purchased item unit.</p>
               </Card>
             </div>
-            <div className="rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-5 text-sm leading-7 text-cyan-50">
+            <div className="rounded-3xl border border-white/15 bg-white/5 p-5 text-sm leading-7 text-slate-200">
               Owner reminder: only sell authorized subscriptions, licenses, and redemption keys. Confirm resale rights and logo usage rights before launch.
             </div>
           </div>
@@ -78,10 +78,10 @@ export default async function HomePage() {
       <section className="space-y-6">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">Featured products</p>
-            <h2 className="mt-2 text-3xl font-black text-white">Fast-moving tools with glowing demand</h2>
-          </div>
-          <Link href="/products" className="inline-flex items-center gap-2 text-sm font-medium text-cyan-200">
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-300">Featured products</p>
+              <h2 className="mt-2 text-3xl font-black text-white">Fast-moving tools with glowing demand</h2>
+            </div>
+          <Link href="/products" className="inline-flex items-center gap-2 text-sm font-medium text-slate-200">
             Explore full catalog <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -93,9 +93,9 @@ export default async function HomePage() {
       <CatalogGrid sections={sections} />
       <FAQSection />
 
-      <Card className="flex flex-col gap-6 overflow-hidden bg-gradient-to-r from-orange-500/10 via-white/5 to-cyan-500/10 md:flex-row md:items-center md:justify-between">
+      <Card className="flex flex-col gap-6 overflow-hidden bg-white/[0.04] md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">Launch-ready store</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-300">Launch-ready store</p>
           <h2 className="mt-2 text-3xl font-black text-white">Deploy on Vercel, connect Google login, and go live.</h2>
           <p className="mt-3 max-w-2xl text-slate-300">Everything is structured for PostgreSQL, Prisma, Auth.js, PayPal verification, and owner-managed key delivery.</p>
         </div>

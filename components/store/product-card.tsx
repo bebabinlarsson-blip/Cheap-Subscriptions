@@ -18,8 +18,8 @@ export function ProductCard({ product }: { product: CatalogProduct }) {
   const disabled = product.comingSoon || soldOut;
 
   return (
-    <Card className="group relative overflow-hidden border-white/10 bg-gradient-to-b from-white/10 to-white/[0.02] transition hover:-translate-y-1 hover:border-cyan-400/40">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.18),transparent_30%)] opacity-0 transition group-hover:opacity-100" />
+    <Card className="group relative overflow-hidden border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-white/30">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(148,163,184,0.12),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(51,65,85,0.18),transparent_35%)] opacity-0 transition group-hover:opacity-100" />
       <div className="relative space-y-5">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -30,7 +30,7 @@ export function ProductCard({ product }: { product: CatalogProduct }) {
               <p className="text-sm text-slate-400">{product.duration ?? "Digital license"}</p>
             </div>
           </div>
-          <Badge className={product.comingSoon ? "border-amber-400/30 bg-amber-400/10 text-amber-200" : product.stockCount > 3 ? "border-cyan-400/30 bg-cyan-400/10 text-cyan-100" : "border-orange-400/30 bg-orange-400/10 text-orange-100"}>
+          <Badge className={product.comingSoon ? "border-slate-400/30 bg-slate-400/10 text-slate-200" : product.stockCount > 3 ? "border-slate-300/30 bg-slate-300/10 text-slate-100" : "border-slate-500/30 bg-slate-500/10 text-slate-100"}>
             {product.comingSoon ? "Coming Soon" : product.stockCount > 3 ? `${product.stockCount} in stock` : product.stockCount > 0 ? `Only ${product.stockCount} left` : "Sold Out"}
           </Badge>
         </div>
