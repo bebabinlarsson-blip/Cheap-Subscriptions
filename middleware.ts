@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
     if (isProtectedApi) {
       return NextResponse.json({ error: "Authentication service unavailable" }, { status: 503 });
     }
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/?error=auth_unavailable", request.url));
   }
 
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });

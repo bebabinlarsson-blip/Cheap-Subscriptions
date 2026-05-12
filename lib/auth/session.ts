@@ -14,7 +14,7 @@ export async function getAuthSession() {
 
 export async function requireUser(callbackUrl = "/dashboard") {
   if (!isAuthSecretConfigured()) {
-    redirect("/");
+    redirect("/?error=auth_unavailable");
   }
 
   const session = await getAuthSession();
