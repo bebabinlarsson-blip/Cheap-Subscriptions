@@ -2,7 +2,7 @@ import { ProductKeyStatus, type OrderStatus } from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
 
 import { fallbackProducts, categoryOrder } from "@/lib/data/products";
-import { isDatabaseConfigured } from "@/lib/env";
+import { getStorePurchasedItemsBaseline, isDatabaseConfigured } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 import type { CatalogProduct } from "@/lib/types";
 
@@ -71,14 +71,29 @@ export async function getFeaturedProducts() {
 }
 
 export async function getStoreSummary() {
+  const basePurchasedItemCount = getStorePurchasedItemsBaseline();
   const products = await getCatalogProducts();
   const availableCount = products.filter((product) => product.priceCents !== null).length;
   const lowStock = products.filter((product) => !product.comingSoon && product.stockCount <= 3).length;
+  let purchasedItems = basePurchasedItemCount;
+
+  if (isDatabaseConfigured()) {
+    const paidItemAggregate = await prisma.orderItem.aggregate({
+      where: {
+        order: { status: "PAID" },
+        quantity: { gt: 0 },
+      },
+      _sum: { quantity: true },
+    });
+
+    purchasedItems += paidItemAggregate._sum.quantity ?? 0;
+  }
 
   return {
     availableCount,
     lowStock,
     categories: categoryOrder.length,
+    purchasedItems,
   };
 }
 

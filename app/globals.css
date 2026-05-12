@@ -9,9 +9,8 @@
 body {
   @apply bg-slate-950 text-slate-100;
   background-image:
-    radial-gradient(circle at top, rgba(168, 85, 247, 0.16), transparent 32%),
-    radial-gradient(circle at right, rgba(34, 211, 238, 0.12), transparent 28%),
-    radial-gradient(circle at left, rgba(249, 115, 22, 0.12), transparent 26%),
+    radial-gradient(circle at top, rgba(148, 163, 184, 0.12), transparent 36%),
+    radial-gradient(circle at right, rgba(71, 85, 105, 0.1), transparent 30%),
     linear-gradient(180deg, #020617 0%, #020617 40%, #000000 100%);
 }
 
