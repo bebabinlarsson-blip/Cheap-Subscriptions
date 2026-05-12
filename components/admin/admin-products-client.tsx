@@ -9,9 +9,12 @@ import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Table, Td, Th } from "@/components/ui/table";
 import { categoryOrder } from "@/lib/data/products";
+import type { CatalogProduct } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
 
-export function AdminProductsClient({ products }: { products: any[] }) {
+type AdminProduct = CatalogProduct;
+
+export function AdminProductsClient({ products }: { products: AdminProduct[] }) {
   const [search, setSearch] = useState("");
   const filtered = useMemo(
     () => products.filter((product) => `${product.name} ${product.category}`.toLowerCase().includes(search.toLowerCase())),

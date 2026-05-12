@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 import "@/app/globals.css";
 import { AppProviders } from "@/components/providers/app-providers";
@@ -7,7 +7,13 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { getAuthSession } from "@/lib/auth/session";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = localFont({
+  src: [
+    { path: "./fonts/GeistVF.woff", style: "normal" },
+    { path: "./fonts/GeistMonoVF.woff", style: "normal" },
+  ],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Premium Tools Mega List",

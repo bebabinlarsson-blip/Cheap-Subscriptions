@@ -1,5 +1,6 @@
 "use client";
 
+import type { OrderStatus } from "@prisma/client";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,27 @@ import { Select } from "@/components/ui/select";
 import { Table, Td, Th } from "@/components/ui/table";
 import { formatDate, formatPrice } from "@/lib/utils";
 
-export function AdminOrdersClient({ orders }: { orders: any[] }) {
+type AdminOrderItem = {
+  id: string;
+  quantity: number;
+  product: {
+    name: string;
+  };
+};
+
+type AdminOrder = {
+  id: string;
+  createdAt: Date | string;
+  totalCents: number;
+  currency: string;
+  status: OrderStatus;
+  user?: {
+    email?: string | null;
+  } | null;
+  items: AdminOrderItem[];
+};
+
+export function AdminOrdersClient({ orders }: { orders: AdminOrder[] }) {
   const [search, setSearch] = useState("");
   const filtered = useMemo(
     () => orders.filter((order) => `${order.id} ${order.user?.email ?? ""}`.toLowerCase().includes(search.toLowerCase())),
@@ -49,7 +70,7 @@ export function AdminOrdersClient({ orders }: { orders: any[] }) {
                 <Td>{order.status}</Td>
                 <Td>
                   <ul className="space-y-1 text-xs text-slate-400">
-                    {order.items.map((item: any) => <li key={item.id}>{item.quantity} × {item.product.name}</li>)}
+                    {order.items.map((item) => <li key={item.id}>{item.quantity} × {item.product.name}</li>)}
                   </ul>
                 </Td>
                 <Td>

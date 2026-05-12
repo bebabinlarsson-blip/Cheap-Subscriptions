@@ -6,7 +6,29 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { formatDate, truncateKey } from "@/lib/utils";
 
-export function InboxClient({ messages, keys }: { messages: any[]; keys: any[] }) {
+type InboxMessageView = {
+  id: string;
+  title: string;
+  body: string;
+  read: boolean;
+  createdAt: Date | string;
+};
+
+type DeliveredKey = {
+  id: string;
+  keyValue: string;
+  soldAt?: Date | string | null;
+  createdAt: Date | string;
+  product: {
+    name: string;
+    duration?: string | null;
+  };
+  order?: {
+    id: string;
+  } | null;
+};
+
+export function InboxClient({ messages, keys }: { messages: InboxMessageView[]; keys: DeliveredKey[] }) {
   return (
     <div className="space-y-6">
       <Card className="space-y-3">

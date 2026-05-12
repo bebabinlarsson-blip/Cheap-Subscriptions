@@ -1,5 +1,6 @@
 "use client";
 
+import type { Role } from "@prisma/client";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,19 @@ import { Select } from "@/components/ui/select";
 import { Table, Td, Th } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
 
-export function AdminUsersClient({ users }: { users: any[] }) {
+type AdminUser = {
+  id: string;
+  name: string | null;
+  email: string;
+  role: Role;
+  createdAt: Date | string;
+  _count: {
+    orders: number;
+    inboxMessages: number;
+  };
+};
+
+export function AdminUsersClient({ users }: { users: AdminUser[] }) {
   const [search, setSearch] = useState("");
   const filtered = useMemo(
     () => users.filter((user) => `${user.email} ${user.name ?? ""}`.toLowerCase().includes(search.toLowerCase())),

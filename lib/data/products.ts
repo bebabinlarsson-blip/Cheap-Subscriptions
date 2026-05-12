@@ -114,5 +114,6 @@ export const seedCatalog: SeedProduct[] = rawCatalog.map(
 export const fallbackProducts = seedCatalog.map((product) => ({
   ...product,
   id: product.slug,
+  active: true,
   stockCount: product.comingSoon ? 0 : 5,
 }));

@@ -1,3 +1,4 @@
+import { Role } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 import { getAuthSession } from "@/lib/auth/session";
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
   const userId = formData.get("userId")?.toString();
   const role = formData.get("role")?.toString();
   if (userId && role) {
-    await prisma.user.update({ where: { id: userId }, data: { role: role as any } });
+    await prisma.user.update({ where: { id: userId }, data: { role: role as Role } });
   }
 
   return NextResponse.redirect(new URL("/admin/users", request.url), { status: 303 });

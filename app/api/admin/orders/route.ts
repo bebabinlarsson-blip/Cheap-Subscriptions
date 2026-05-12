@@ -1,3 +1,4 @@
+import { OrderStatus } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 import { getAuthSession } from "@/lib/auth/session";
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
   const orderId = formData.get("orderId")?.toString();
   const status = formData.get("status")?.toString();
   if (orderId && status) {
-    await prisma.order.update({ where: { id: orderId }, data: { status: status as any } });
+    await prisma.order.update({ where: { id: orderId }, data: { status: status as OrderStatus } });
   }
 
   return NextResponse.redirect(new URL("/admin/orders", request.url), { status: 303 });

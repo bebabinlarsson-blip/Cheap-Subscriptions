@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^6.19.3",
+    "autoprefixer": "^10.5.0",
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
     "next": "^15.5.18",
@@ -34,7 +35,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.5.18",
     "postcss": "^8.5.6",
-    "prisma": "^7.8.0",
+    "prisma": "^6.19.3",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"

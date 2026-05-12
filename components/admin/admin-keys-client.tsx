@@ -1,5 +1,6 @@
 "use client";
 
+import type { ProductKeyStatus } from "@prisma/client";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,18 @@ import { Select } from "@/components/ui/select";
 import { Table, Td, Th } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 
-export function AdminKeysClient({ products }: { products: any[] }) {
+type KeySummary = {
+  id: string;
+  status: ProductKeyStatus;
+};
+
+type ProductWithKeys = {
+  id: string;
+  name: string;
+  keys: KeySummary[];
+};
+
+export function AdminKeysClient({ products }: { products: ProductWithKeys[] }) {
   const [selectedProduct, setSelectedProduct] = useState(products[0]?.id ?? "");
   const current = useMemo(() => products.find((product) => product.id === selectedProduct) ?? products[0], [products, selectedProduct]);
 
@@ -57,9 +69,9 @@ export function AdminKeysClient({ products }: { products: any[] }) {
             <tbody>
               <tr className="border-b border-white/5">
                 <Td>{current.name}</Td>
-                <Td>{current.keys.filter((key: any) => key.status === "AVAILABLE").length}</Td>
-                <Td>{current.keys.filter((key: any) => key.status === "RESERVED").length}</Td>
-                <Td>{current.keys.filter((key: any) => key.status === "SOLD").length}</Td>
+                <Td>{current.keys.filter((key) => key.status === "AVAILABLE").length}</Td>
+                <Td>{current.keys.filter((key) => key.status === "RESERVED").length}</Td>
+                <Td>{current.keys.filter((key) => key.status === "SOLD").length}</Td>
                 <Td>
                   <form action="/api/admin/keys" method="post">
                     <input type="hidden" name="_method" value="delete" />
