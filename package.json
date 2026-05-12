@@ -1,0 +1,43 @@
+{
+  "name": "premium-tools-mega-list",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.7",
+    "@prisma/client": "^6.19.3",
+    "autoprefixer": "^10.5.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.14.0",
+    "next": "^15.5.18",
+    "next-auth": "^4.24.14",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "simple-icons": "^16.19.0",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.24",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.5.18",
+    "postcss": "^8.5.6",
+    "prisma": "^6.19.3",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
