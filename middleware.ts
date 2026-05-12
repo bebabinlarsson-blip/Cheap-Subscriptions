@@ -10,11 +10,11 @@ export async function middleware(request: NextRequest) {
 
   const isProtectedPage = pathname.startsWith("/dashboard") || pathname.startsWith("/admin");
   const isProtectedApi = pathname.startsWith("/api/admin") || pathname.startsWith("/api/paypal");
-  const hasAuthSecret = isAuthSecretConfigured();
+  const isAuthConfigured = isAuthSecretConfigured();
 
-  if (!hasAuthSecret && (isProtectedPage || isProtectedApi)) {
+  if (!isAuthConfigured && (isProtectedPage || isProtectedApi)) {
     if (isProtectedApi) {
-      return NextResponse.json({ error: "Authentication not configured" }, { status: 401 });
+      return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
     }
     return NextResponse.redirect(new URL("/", request.url));
   }
