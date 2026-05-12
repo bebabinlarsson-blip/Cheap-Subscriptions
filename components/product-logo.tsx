@@ -5,6 +5,8 @@ import { useMemo, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
+type LogoState = "clearbit" | "google" | "initials";
+
 const logoDomainMap: Record<string, string> = {
   "1password": "1password.com",
   adobe: "adobe.com",
@@ -70,9 +72,10 @@ const logoDomainMap: Record<string, string> = {
 };
 
 export function ProductLogo({ name, logoKey, className }: { name: string; logoKey: string; className?: string; }) {
-  const [loadFailed, setLoadFailed] = useState(false);
+  const [logoState, setLogoState] = useState<LogoState>("clearbit");
   const domain = logoDomainMap[logoKey.toLowerCase()];
-  const logoUrl = useMemo(() => (domain ? `https://logo.clearbit.com/${domain}?size=64` : null), [domain]);
+  const clearbitUrl = useMemo(() => (domain ? `https://logo.clearbit.com/${domain}?size=64` : null), [domain]);
+  const googleUrl = useMemo(() => (domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null), [domain]);
 
   const initials = name
     .split(" ")
@@ -80,17 +83,22 @@ export function ProductLogo({ name, logoKey, className }: { name: string; logoKe
     .map((part) => part[0])
     .join("");
 
+  const currentSrc = logoState === "clearbit" ? clearbitUrl : logoState === "google" ? googleUrl : null;
+
   return (
     <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/80", className)}>
-      {logoUrl && !loadFailed ? (
+      {currentSrc ? (
         <Image
-          src={logoUrl}
+          src={currentSrc}
           alt={`${name} logo`}
           className="h-7 w-7 rounded-md object-contain"
           width={28}
           height={28}
           referrerPolicy="no-referrer"
-          onError={() => setLoadFailed(true)}
+          onError={() => {
+            if (logoState === "clearbit") setLogoState(googleUrl ? "google" : "initials");
+            else if (logoState === "google") setLogoState("initials");
+          }}
         />
       ) : (
         <span className="text-sm font-semibold text-slate-200">{initials}</span>

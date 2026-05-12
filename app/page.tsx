@@ -20,7 +20,7 @@ export default async function HomePage() {
     { icon: ShoppingBag, label: "Instant Delivery" },
     { icon: LockKeyhole, label: "Secure PayPal Checkout" },
     { icon: ShieldCheck, label: "Verified Digital Licenses" },
-    { icon: Inbox, label: "Limited Stock" },
+    { icon: Inbox, label: "Unlimited Stock" },
   ];
 
   return (
