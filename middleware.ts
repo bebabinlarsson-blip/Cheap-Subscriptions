@@ -10,18 +10,19 @@ export async function middleware(request: NextRequest) {
 
   const isProtectedPage = pathname.startsWith("/dashboard") || pathname.startsWith("/admin");
   const isProtectedApi = pathname.startsWith("/api/admin") || pathname.startsWith("/api/paypal");
+  const needsAuthentication = isProtectedPage || isProtectedApi;
   const isAuthConfigured = isAuthSecretConfigured();
 
-  if (!isAuthConfigured && (isProtectedPage || isProtectedApi)) {
+  if (!isAuthConfigured && needsAuthentication) {
     if (isProtectedApi) {
-      return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
+      return NextResponse.json({ error: "Authentication service unavailable" }, { status: 503 });
     }
     return NextResponse.redirect(new URL("/", request.url));
   }
 
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 
-  if (!token && (isProtectedPage || isProtectedApi)) {
+  if (!token && needsAuthentication) {
     if (isProtectedApi) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
