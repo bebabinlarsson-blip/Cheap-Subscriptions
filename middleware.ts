@@ -3,13 +3,23 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 import { isOwnerEmail } from "@/lib/auth/owner";
+import { isAuthSecretConfigured } from "@/lib/env";
 
 export async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = request.nextUrl;
 
   const isProtectedPage = pathname.startsWith("/dashboard") || pathname.startsWith("/admin");
   const isProtectedApi = pathname.startsWith("/api/admin") || pathname.startsWith("/api/paypal");
+  const missingAuthSecret = !isAuthSecretConfigured();
+
+  if (missingAuthSecret && (isProtectedPage || isProtectedApi)) {
+    if (isProtectedApi) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 
   if (!token && (isProtectedPage || isProtectedApi)) {
     if (isProtectedApi) {
